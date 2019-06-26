@@ -1,11 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
 import Toolbar from './components/Toolbar/Toolbar';
 
 function App() {
   return (
-    <Fragment >
+    <BrowserRouter >
       <Toolbar></Toolbar>
-    </Fragment>
+    </BrowserRouter>
   );
 }
 

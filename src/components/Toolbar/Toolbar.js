@@ -100,10 +100,10 @@ const Appbar = () => {
         <div className={classes.root} >
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
-                    <Button text="Home" />
-                    <Button text="Teams" />
-                    <Button text="Fixtures" />
-                    <Button text="Odds" />
+                    <Button text="Home" to="/" />
+                    <Button text="Teams" to="/teams" />
+                    <Button text="Fixtures" to="/fixtures" />
+                    <Button text="Odds" to="/odds" />
                     <Grid container justify="center">
                         <Avatar alt="Premier League" src={appLogo} className={classes.logo} />
                     </Grid>

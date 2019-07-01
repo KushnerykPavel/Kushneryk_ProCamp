@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import CountryItem from '../../UI/CountryItem/CountryItem';
 import Spinner from '../../UI/Spinner/Spinner';
 
-import country_api_data from '../../../api_mocks/country_api';
+import { getCountries } from '../../../providers/index';
 
 const ITEMS_PER_ROW = 4
 
@@ -64,7 +64,8 @@ export default function Countries() {
     const [countryData, setCountryData] = useState(null);
 
     useEffect(() => {
-        setCountryData(country_api_data)
+        getCountries().then(res => setCountryData(res));
+
     }, [])
 
     if (!countryData) {

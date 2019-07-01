@@ -1,8 +1,12 @@
 import axios from '../axios';
 
 export const getCountries = async () => {
-    let res = await axios.get('/countries');
-    let { data } = res.data;
+    try {
+        let res = await axios.get('/countries');
+        let { data } = res;
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 
-    return data;
 }

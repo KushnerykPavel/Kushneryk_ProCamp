@@ -6,5 +6,6 @@ const instance = axios.create({
 });
 
 instance.defaults.headers.common['X-RapidAPI-Proxy-Secret'] = config.token
+instance.defaults.headers.common['Accept'] = 'application/json'
 
 export default instance;

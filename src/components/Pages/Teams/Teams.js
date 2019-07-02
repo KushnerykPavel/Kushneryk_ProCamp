@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-import CountryItem from '../../UI/CountryItem/CountryItem';
+import TeamItem from '../../UI/TeamItem/TeamItem';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { getTeams } from '../../../providers/index';
@@ -25,11 +25,12 @@ const teamsChunksList = teams_data => {
         }
 
         let team_item =
-            <CountryItem
+            <TeamItem
                 key={item.team_id}
-                country={item.name}
-                flag={item.logo}
-                code={item.country}
+                team_id={item.team_id}
+                name={item.name}
+                logo={item.logo}
+                country={item.country}
             />
 
         resultArray[chunkIndex].push(team_item)

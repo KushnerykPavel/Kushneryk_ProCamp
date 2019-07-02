@@ -1,4 +1,4 @@
-import axios from '../axios';
+import axios from '../configs/axios';
 
 export const getCountries = async () => {
     try {
@@ -8,5 +8,14 @@ export const getCountries = async () => {
     } catch (e) {
         console.log(e);
     }
+}
 
+export const getTeams = async leagueId => {
+    try {
+        let res = await axios.get(`/teams/league/${leagueId}`);
+        let { data } = res;
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 }

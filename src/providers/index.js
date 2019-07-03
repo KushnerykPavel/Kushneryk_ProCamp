@@ -32,7 +32,7 @@ export const getTeam = async teamId => {
 
 export const getFixtures = async () => {
     try {
-        let res = await axios.get('/fixtures/live');
+        let res = await axios.get('/fixtures/league/2');
         let { data } = res;
         return data.api.fixtures;
     } catch (e) {

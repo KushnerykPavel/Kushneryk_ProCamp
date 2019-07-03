@@ -6,7 +6,7 @@ export const getCountries = async () => {
         let { data } = res;
         return data;
     } catch (e) {
-        console.log(e);
+        return e;
     }
 }
 
@@ -16,7 +16,7 @@ export const getTeams = async leagueId => {
         let { data } = res;
         return data;
     } catch (e) {
-        console.log(e);
+        return e;
     }
 }
 
@@ -26,6 +26,16 @@ export const getTeam = async teamId => {
         let { data } = res;
         return data.api.teams[0];
     } catch (e) {
-        console.log(e);
+        return e;
     }
 }
+
+export const getFixtures = async () => {
+    try {
+        let res = await axios.get('/fixtures/live');
+        let { data } = res;
+        return data.api.fixtures;
+    } catch (e) {
+        return e;
+    }
+} 

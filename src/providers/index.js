@@ -19,3 +19,13 @@ export const getTeams = async leagueId => {
         console.log(e);
     }
 }
+
+export const getTeam = async teamId => {
+    try {
+        let res = await axios.get(`/teams/team/${teamId}`);
+        let { data } = res;
+        return data.api.teams[0];
+    } catch (e) {
+        console.log(e);
+    }
+}

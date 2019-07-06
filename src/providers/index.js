@@ -24,7 +24,12 @@ export const getTeam = async teamId => {
     try {
         let res = await axios.get(`/teams/team/${teamId}`);
         let { data } = res;
+        console.log(data)
+        if(+data.api.results) {
         return data.api.teams[0];
+    } else {
+        throw Error;
+    }
     } catch (e) {
         return e;
     }

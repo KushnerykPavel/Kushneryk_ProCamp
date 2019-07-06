@@ -7,7 +7,6 @@ import Spinner from '../../UI/Spinner/Spinner';
 
 import { getTeams } from '../../../providers/index';
 
-const ITEMS_PER_ROW = 4
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,39 +15,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const teamsChunksList = teams_data => {
-    return teams_data.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / ITEMS_PER_ROW)
-
-        if (!resultArray[chunkIndex]) {
-            resultArray[chunkIndex] = []
-        }
-
-        let team_item =
-            <TeamItem
-                key={item.team_id}
-                team_id={item.team_id}
-                name={item.name}
-                logo={item.logo}
-                country={item.country}
-            />
-
-        resultArray[chunkIndex].push(team_item)
-
-        return resultArray
-    }, [])
-}
 
 const NestedGrid = props => {
 
     const classes = useStyles();
 
-    let teamsChunks = teamsChunksList(props.data.api.teams)
+    let teamsChunks = props.data.api.teams
 
-    let teamsTable = teamsChunks.map((teamsRow, idx) => {
+    let teamsTable = teamsChunks.map((item, idx) => {
         return (
-            <Grid container item xs={12} spacing={3} key={idx}>
-                {teamsRow}
+            <Grid container item xs={3} spacing={3} key={idx}>
+                <TeamItem
+                    key={item.team_id}
+                    team_id={item.team_id}
+                    name={item.name}
+                    logo={item.logo}
+                    country={item.country}
+                />
             </Grid>
         )
     })

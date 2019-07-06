@@ -23,7 +23,7 @@ const TeamItem = item => {
     const classes = useStyles();
 
     return (
-        <Grid item xs={3}>
+        <Grid item xs={3} md={12}>
             <Link to={`/teams/${item.team_id}`}><img className={classes.img} alt="complex" src={item.logo} /></Link>
             <Paper className={classes.paper}>{item.name} <b>({item.country})</b></Paper>
         </Grid>

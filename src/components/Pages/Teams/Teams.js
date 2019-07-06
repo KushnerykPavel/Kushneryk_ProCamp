@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import TeamItem from '../../UI/TeamItem/TeamItem';
 import Spinner from '../../UI/Spinner/Spinner';
 
-import { getTeams } from '../../../providers/index';
+import { connect } from 'react-redux';
+import { teamsGetData } from '../../../actions/teams';
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,7 +21,7 @@ const NestedGrid = props => {
 
     const classes = useStyles();
 
-    let teamsChunks = props.data.api.teams
+    let teamsChunks = props.data
 
     let teamsTable = teamsChunks.map((item, idx) => {
         return (
@@ -45,18 +46,30 @@ const NestedGrid = props => {
     );
 }
 
-export default function Teams() {
-    const [teamsData, setTeamsData] = useState(null);
+const Teams = props => {
 
     useEffect(() => {
-        getTeams(2).then(res => setTeamsData(res));
-
+        props.teamsData(2)
     }, [])
 
-    if (!teamsData) {
+    if (!props.teams.length) {
         return <Spinner />
     } else {
-        return <NestedGrid data={teamsData} />
+        return <NestedGrid data={props.teams} />
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        teams: state.teams
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        teamsData: id => dispatch(teamsGetData(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Teams);

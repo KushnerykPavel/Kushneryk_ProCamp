@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,7 +12,8 @@ import TableRow from '@material-ui/core/TableRow';
 
 import Spinner from '../../UI/Spinner/Spinner';
 
-import { getTeam } from '../../../providers';
+import { connect } from 'react-redux';
+import { teamGetData } from '../../../actions/teams';
 
 const useStyles = makeStyles({
     card: {
@@ -42,6 +43,7 @@ const TableItem = props => {
 }
 
 const TableData = props => {
+
     const classes = useStyles();
     const { founded, venue_address, venue_capacity,
         venue_city, venue_name, venue_surface } = props;
@@ -83,7 +85,6 @@ const Team = teamData => {
                 <CardMedia
                     className={classes.media}
                     image={logo}
-                    title="Contemplative Reptile"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -101,27 +102,38 @@ const MediaCard = props => {
 
     const teamId = props.match.params.id;
 
-    const [teamData, setTeamData] = useState(null);
-
     useEffect(() => {
-        getTeam(teamId).then(res => setTeamData(res));
+        props.teamData(teamId)
     }, [teamId])
 
-    if (!teamData) {
+    if (!props.team) {
         return <Spinner />;
     } else {
+        console.log(props.team.venue_name)
         return <Team
-            logo={teamData.logo}
-            name={teamData.name}
-            country={teamData.country}
-            founded={teamData.founded}
-            venue_address={teamData.venue_address}
-            venue_capacity={teamData.venue_capacity}
-            venue_city={teamData.venue_city}
-            venue_name={teamData.venue_name}
-            venue_surface={teamData.venue_surface}
+            logo={props.team.logo}
+            name={props.team.name}
+            country={props.team.country}
+            founded={props.team.founded}
+            venue_address={props.team.venue_address}
+            venue_capacity={props.team.venue_capacity}
+            venue_city={props.team.venue_city}
+            venue_name={props.team.venue_name}
+            venue_surface={props.team.venue_surface}
         />
     }
 }
 
-export default MediaCard;
+const mapStateToProps = state => {
+
+    return {
+        team: state.teams
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        teamData: id => dispatch(teamGetData(id))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MediaCard);

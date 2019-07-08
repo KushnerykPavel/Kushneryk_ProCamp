@@ -76,7 +76,7 @@ const Fixtures = props => {
 
 const mapStateToProps = state => {
     return {
-        fixtures: state.fixtures
+        fixtures: state.fixtures.fixtures
     }
 }
 

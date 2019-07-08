@@ -127,7 +127,7 @@ const MediaCard = props => {
 const mapStateToProps = state => {
 
     return {
-        team: state.teams
+        team: state.teams.teams
     }
 }
 

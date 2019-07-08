@@ -62,7 +62,7 @@ const Teams = props => {
 
 const mapStateToProps = state => {
     return {
-        teams: state.teams
+        teams: state.teams.teams
     }
 }
 

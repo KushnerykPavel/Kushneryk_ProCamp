@@ -43,4 +43,14 @@ export const getFixtures = async () => {
     } catch (e) {
         return e;
     }
+}
+
+export const getFixtureLive = async () => {
+    try {
+        let res = await axios.get('/fixtures/live');
+        let { data } = res;
+        return data.api.fixtures;
+    } catch (e) {
+        return e;
+    }
 } 

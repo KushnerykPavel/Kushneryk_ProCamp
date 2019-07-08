@@ -43,7 +43,7 @@ const Fixtures = props => {
     useEffect(() => {
         props.fixturesList();
     }, [])
-
+    console.log(props.fixtures)
     if (!props.fixtures) {
         return <Spinner />
     } else if (!listData) {

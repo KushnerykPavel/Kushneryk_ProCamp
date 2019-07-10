@@ -14,7 +14,7 @@ export const Loading = () => {
     }
 }
 
-export const getEventsByFixture = fixtureId => {
+export const getEventsByFixtureId = fixtureId => {
     return dispatch => {
         dispatch(Loading());
         getEventsByFixture(fixtureId).then(response => dispatch(getEventsByFixtureSuccess(response)));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,10 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
+import { connect } from 'react-redux';
+import { getEventsByFixtureId } from '../../../actions/events';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -59,10 +63,13 @@ const FixtureExpansionPanel = props => {
 
 const FixtureItem = props => {
     const classes = useStyles();
-
+    
+    useEffect(() => {
+        props.eventsList(props.fixture_id);
+    }, [])
+    console.log(props.events)
     return (
-
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
             <Grid item>
                 <ButtonBase className={classes.image}>
                     <Link to={`/teams/${props.homeTeam.team_id}`}>
@@ -73,12 +80,12 @@ const FixtureItem = props => {
                     {props.homeTeam.team_name}
                 </Typography>
             </Grid>
-            <Grid xs={12} sm container>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1" >Score Full-time: <b>{props.score.fulltime}</b></Typography>
+            <Grid xs={12} md={8} item>
+                <Grid item >
+                    <Typography variant="subtitle1"  >Score Full-time: <b>{props.score.fulltime}</b></Typography>
                     <Typography variant="subtitle1">Score Half-time: <b>{props.score.halftime}</b></Typography>
                 </Grid>
-                <Grid item>
+                <Grid item xs={4}>
                     <Typography variant="body2" color="textSecondary">
                         {props.round}
                     </Typography>
@@ -103,4 +110,16 @@ const FixtureItem = props => {
 }
 
 
-export default FixtureExpansionPanel;
+const mapStateToProps = state => {
+    return {
+        events: state.events.events
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        eventsList: (id) => dispatch(getEventsByFixtureId(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FixtureExpansionPanel);

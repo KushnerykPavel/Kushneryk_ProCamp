@@ -43,7 +43,7 @@ const Fixtures = props => {
     useEffect(() => {
         props.fixturesList();
     }, [])
-    console.log(props.fixtures)
+    
     if (!props.fixtures) {
         return <Spinner />
     } else if (!listData) {
@@ -76,13 +76,13 @@ const Fixtures = props => {
 
 const mapStateToProps = state => {
     return {
-        fixtures: state.fixtures.fixtures
+        fixtures: state.fixtures.fixtures,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(getFixturesByLeague())
+        fixturesList: () => dispatch(getFixturesByLeague()),
     }
 }
 

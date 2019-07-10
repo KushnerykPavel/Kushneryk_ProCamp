@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -7,10 +7,9 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Spinner from '../../UI/Spinner/Spinner';
 
-import { connect } from 'react-redux';
-import { getEventsByFixtureId } from '../../../actions/events';
-
+import { getEventsByFixture } from '../../../providers';
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,38 +35,48 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const EventData = props => {
+    return <li>{props.elapsed}, {props.teamName}, {props.player}, {props.type}</li>
+}
+
 const FixtureExpansionPanel = props => {
     const classes = useStyles();
+    let [event, setEvent] = useState(null)
 
-    return (
-        <div className={classes.root}>
+    useEffect(() => {
+        getEventsByFixture(props.fixture_id).then(res => setEvent(res))
+    }, [])
+    
+    if (!event) {
+        return <Spinner />
+    } else {
+        return (
+            <div className={classes.root}>
 
-            <ExpansionPanel className={classes.paper}>
-                <ExpansionPanelSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <FixtureItem {...props} />
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-            </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
+                <ExpansionPanel className={classes.paper}>
+                    <ExpansionPanelSummary
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <FixtureItem {...props} />
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            <ul>
+                                {event.map((e, idx) => <EventData key={idx} {...e} />)}
+                            </ul>
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 const FixtureItem = props => {
     const classes = useStyles();
-    
-    useEffect(() => {
-        props.eventsList(props.fixture_id);
-    }, [])
-    console.log(props.events)
+
     return (
         <Grid container spacing={3}>
             <Grid item>
@@ -110,16 +119,4 @@ const FixtureItem = props => {
 }
 
 
-const mapStateToProps = state => {
-    return {
-        events: state.events.events
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        eventsList: (id) => dispatch(getEventsByFixtureId(id))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FixtureExpansionPanel);
+export default FixtureExpansionPanel;

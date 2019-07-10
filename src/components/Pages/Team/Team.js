@@ -109,7 +109,7 @@ const MediaCard = props => {
     if (!props.team) {
         return <Spinner />;
     } else {
-        console.log(props.team.venue_name)
+        
         return <Team
             logo={props.team.logo}
             name={props.team.name}

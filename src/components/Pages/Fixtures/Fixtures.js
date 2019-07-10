@@ -43,7 +43,7 @@ const Fixtures = props => {
     useEffect(() => {
         props.fixturesList();
     }, [])
-    
+
     if (!props.fixtures) {
         return <Spinner />
     } else if (!listData) {
@@ -55,7 +55,7 @@ const Fixtures = props => {
                     currPage={page}
                     totalPages={parseInt(props.fixtures.length / OFFSET)}
                 />
-                <FixturesList fixtures={props.fixtures.slice(0, OFFSET)} />
+                <FixturesList fixtures={props.fixtures.slice(0, OFFSET)}  />
             </div>
         );
     } else {
@@ -67,7 +67,7 @@ const Fixtures = props => {
                     currPage={page}
                     totalPages={parseInt(props.fixtures.length / OFFSET)}
                 />
-                <FixturesList fixtures={listData} />
+                <FixturesList fixtures={listData}  />
             </div>
         )
     }
@@ -82,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(getFixturesByLeague()),
+        fixturesList: () => dispatch(getFixturesByLeague())
     }
 }
 

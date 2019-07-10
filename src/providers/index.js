@@ -53,4 +53,14 @@ export const getFixtureLive = async () => {
     } catch (e) {
         return e;
     }
-} 
+}
+
+export const getEventsByFixture = async fixtureId => {
+    try {
+        let res = axios.get(`/events/${fixtureId}`);
+        let { data } = res;
+        return data.api.events;
+    } catch (e) {
+        return e;
+    }
+}

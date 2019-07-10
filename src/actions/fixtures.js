@@ -8,7 +8,7 @@ export const getFixturesByLeagueSuccess = payload => {
     }
 }
 
-export const getFixturesByLeagueLoading = () => {
+export const Loading = () => {
     return {
         type: LOADING,
     }
@@ -17,7 +17,7 @@ export const getFixturesByLeagueLoading = () => {
 export const getFixturesByLeague = () => {
 
     return dispatch => {
-        dispatch(getFixturesByLeagueLoading())
+        dispatch(Loading())
         getFixtures().then(response => dispatch(getFixturesByLeagueSuccess(response)))
     }
 }

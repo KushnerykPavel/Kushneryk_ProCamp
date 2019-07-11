@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
 import Spinner from '../../UI/Spinner/Spinner';
 import FixtureItem from '../../UI/FixtureItem/FixtureItem';
@@ -20,56 +20,66 @@ const Navigation = (props) => {
         <button onClick={props.nextPage}>Next</button>
     </div >)
 }
-const Fixtures = props => {
-    const OFFSET = 8;
-    const [page, setPage] = useState(0);
-    const [listData, setListData] = useState(null);
+class Fixtures extends Component {
+    OFFSET = 8;
 
-    const prevPage = () => {
-        if (page >= 1) {
-            let prev = page - 1;
-            setPage(prev)
-            setListData(props.fixtures.slice(OFFSET * prev, OFFSET * (prev + 1)));
+    state = {
+        page: 0,
+        listData: null
+    }
+
+    prevPage = () => {
+        if (this.state.page >= 1) {
+            let prev = this.state.page - 1;
+            this.setState({
+                listData: this.props.fixtures.slice(this.OFFSET * prev, this.OFFSET * (prev + 1)),
+                page: prev
+            })
         }
 
     }
 
-    const nextPage = () => {
-        let next = page + 1
-        setPage(next)
-        setListData(props.fixtures.slice(OFFSET * next, OFFSET * (next + 1)));
+    nextPage = () => {
+        let next = this.state.page + 1
+        this.setState({
+            listData: this.props.fixtures.slice(this.OFFSET * next, this.OFFSET * (next + 1)),
+            page: next
+        })
     }
 
-    useEffect(() => {
-        props.fixturesList();
-    }, [])
+    componentDidMount() {
+        this.props.fixturesList();
+    }
 
-    if (!props.fixtures) {
-        return <Spinner />
-    } else if (!listData) {
-        return (
-            <div>
-                <Navigation
-                    prevPage={prevPage}
-                    nextPage={nextPage}
-                    currPage={page}
-                    totalPages={parseInt(props.fixtures.length / OFFSET)}
-                />
-                <FixturesList fixtures={props.fixtures.slice(0, OFFSET)}  />
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <Navigation
-                    prevPage={prevPage}
-                    nextPage={nextPage}
-                    currPage={page}
-                    totalPages={parseInt(props.fixtures.length / OFFSET)}
-                />
-                <FixturesList fixtures={listData}  />
-            </div>
-        )
+    render() {
+        if (!this.props.fixtures) {
+            return <Spinner />
+        } else if (!this.state.listData) {
+            return (
+                <div>
+                    <Navigation
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                        currPage={this.state.page}
+                        totalPages={parseInt(this.props.fixtures.length / this.OFFSET)}
+                    />
+                    <FixturesList fixtures={this.props.fixtures.slice(0, this.OFFSET)} />
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <Navigation
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                        currPage={this.state.page}
+                        totalPages={parseInt(this.props.fixtures.length / this.OFFSET)}
+                    />
+                    <FixturesList fixtures={this.state.listData} />
+                </div>
+            )
+        }
+
     }
 
 }

@@ -12,7 +12,7 @@ export const getCountries = async () => {
 
 export const getTeams = async leagueId => {
     try {
-        let res = await axios.get(`/teams/league/2`);
+        let res = await axios.get(`/teams/league/${leagueId}`);
         let { data } = res;
         return data.api.teams;
     } catch (e) {

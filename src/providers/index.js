@@ -55,6 +55,16 @@ export const getFixtureLive = async () => {
     }
 }
 
+export const getFixtureLiveByLeague = async (leagueId) => {
+    try {
+        let res = await axios.get(`/fixtures/live/${leagueId}-${leagueId}-${leagueId}`);
+        let { data } = res;
+        return data.api.fixtures;
+    } catch (e) {
+        return e;
+    }
+}
+
 export const getEventsByFixture = async fixtureId => {
     try {
         let res = await axios.get(`/events/${fixtureId}`);

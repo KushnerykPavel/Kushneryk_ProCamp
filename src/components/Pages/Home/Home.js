@@ -19,44 +19,49 @@ const styles = theme => {
     }
 }
 
-class LiveFixtures extends Component {
+class LiveFixturesSegment extends Component {
 
-    componentDidMount() {
-        this.props.fixturesList();
-    }
-
-    render() {
-        return this.props.fixtures ? <FixturesTable fixtures={this.props.fixtures} /> : <Spinner />
-    }
-}
-
-
-class Home extends Component {
     state = {
         value: "all"
     }
 
     handleChange = (event, value) => {
-        console.log(value)
+        this.props.fixturesList(value);
         this.setState({ value: value })
     }
 
+    componentDidMount() {
+        this.props.fixturesList(this.state.value);
+    }
+
+    render() {
+        const fixures = this.props.fixtures ? <FixturesTable fixtures={this.props.fixtures} /> : <Spinner />
+        return (
+            <React.Fragment>
+                <AppBar position="static" className={this.props.classes.indicator}>
+                    <Tabs value={this.state.value} onChange={this.handleChange}>
+                        <Tab value="all" label="Live" />
+                        <Tab value="pl" label="Premier League" />
+                    </Tabs>
+                </AppBar>
+                {fixures}
+            </React.Fragment>
+        )
+    }
+}
+
+
+class Home extends Component {
     render() {
         return (
-            <Grid container spacing={4} >
-                <Grid item xs={4} >
-                    <AppBar position="static" className={this.props.classes.indicator}>
-                        <Tabs value={this.state.value} onChange={this.handleChange}>
-                            <Tab value="all" label="Live" />
-                            <Tab value="pl" label="Premier League" />
-                        </Tabs>
-                    </AppBar>
-                    {this.state.value === "all" ? <LiveFixtures {...this.props} /> : <p>Premier League</p>}
+            <Grid container spacing={2} >
+                <Grid item xs={5} >
+                    <LiveFixturesSegment {...this.props} />
                 </Grid>
                 <Grid item xs={4} >
                     <p>Item2</p>
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={3} >
                     <p>Item2</p>
                 </Grid>
             </Grid>
@@ -73,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(getFixturesLive())
+        fixturesList: type => dispatch(getFixturesLive(type))
     }
 }
 

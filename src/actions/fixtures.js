@@ -1,5 +1,7 @@
-import { getFixtures, getFixtureLive } from '../providers';
+import { getFixtures, getFixtureLive, getFixtureLiveByLeague } from '../providers';
 import { GET_FIXTURES_BY_LEAGUE, GET_FIXTURES_LIVE, LOADING } from './types'
+import { ALL_LIVE_FIXTURES, PL_LIVE_FIXTURES } from '../configs/constants'
+
 
 export const getFixturesByLeagueSuccess = payload => {
     return {
@@ -29,8 +31,16 @@ export const getFixturesLiveSuccess = payload => {
     }
 }
 
-export const getFixturesLive = () => {
-    return dispatch => {
-        getFixtureLive().then(response => dispatch(getFixturesLiveSuccess(response)))
+export const getFixturesLive = (type) => {
+    switch (type) {
+        case ALL_LIVE_FIXTURES:
+            return dispatch => {
+                getFixtureLive().then(response => dispatch(getFixturesLiveSuccess(response)))
+            }
+        case PL_LIVE_FIXTURES:
+            return dispatch => {
+                getFixtureLiveByLeague(2).then(response => dispatch(getFixturesLiveSuccess(response)))
+            }
     }
+
 }

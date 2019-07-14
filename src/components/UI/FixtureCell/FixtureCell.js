@@ -9,35 +9,6 @@ import FixtureDialog from '../FixtureDialog/FixtureDialog';
 import { getEventsByFixture } from '../../../providers';
 
 
-const styles = theme => {
-    return {
-        root: {
-            flexGrow: 1,
-            marginTop: 50,
-            marginBottom: 50,
-        },
-        paper: {
-            padding: theme.spacing(2),
-            margin: 'auto',
-            maxWidth: '100%',
-        },
-        image: {
-            width: 128,
-            height: 128,
-        },
-        img: {
-            margin: 'auto',
-            display: 'block',
-            maxWidth: '100%',
-            maxHeight: '100%',
-        },
-        table: {
-            minWidth: 650,
-        },
-    }
-};
-
-
 class FixtureCell extends Component {
 
     state = {
@@ -93,14 +64,13 @@ class FixtureCell extends Component {
                         {this.props.homeTeam.team_name}
                     </Link>
                 </TableCell>
-                <TableCell align="right"><b>{this.props.score.fulltime}({this.props.score.halftime})</b></TableCell>
+                <TableCell align="center"><b>{this.props.score.fulltime}({this.props.score.halftime})</b></TableCell>
                 <TableCell align="center">
                     <Link to={`/teams/${this.props.awayTeam.team_id}`}>
                         {this.props.awayTeam.team_name}
                     </Link>
                 </TableCell>
-                <TableCell align="right"> {this.props.event_date}</TableCell>
-                <TableCell align="right"> {this.props.status}</TableCell>
+                <TableCell align="left"> {this.props.status}</TableCell>
                 <FixtureDialog
                     open={this.state.open}
                     handleClose={this.handleClose}
@@ -111,4 +81,4 @@ class FixtureCell extends Component {
     }
 }
 
-export default withStyles(styles)(FixtureCell);
+export default FixtureCell;

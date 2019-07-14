@@ -10,12 +10,12 @@ import EventItemType from './EventItemType';
 
 const EventListItem = (event) => {
     console.log(event)
-    return (<p>
-        <span>{event.elapsed}.</span>
+    return (<div>
+        <span>{event.elapsed} m </span>
         {event.player}({event.teamName})
         <EventItemType type={event.type} detail={event.detail} />
         <hr />
-    </p>)
+    </div>)
 }
 
 const FixtureDialog = props => (

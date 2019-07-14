@@ -10,17 +10,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexShrink: 0,
         color: theme.palette.text.secondary,
-        marginLeft: theme.spacing(2.5),
-    },
+        marginLeft: theme.spacing(2),
+    }
 }));
 
 const TablePaginationActions = props => {
@@ -28,9 +26,6 @@ const TablePaginationActions = props => {
     const theme = useTheme();
     const { count, page, rowsPerPage, onChangePage } = props;
 
-    function handleFirstPageButtonClick(event) {
-        onChangePage(event, 0);
-    }
 
     function handleBackButtonClick(event) {
         onChangePage(event, page - 1);
@@ -40,19 +35,8 @@ const TablePaginationActions = props => {
         onChangePage(event, page + 1);
     }
 
-    function handleLastPageButtonClick(event) {
-        onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    }
-
     return (
         <div className={classes.root}>
-            <IconButton
-                onClick={handleFirstPageButtonClick}
-                disabled={page === 0}
-                aria-label="First Page"
-            >
-                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-            </IconButton>
             <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="Previous Page">
                 {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </IconButton>
@@ -62,13 +46,6 @@ const TablePaginationActions = props => {
                 aria-label="Next Page"
             >
                 {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </IconButton>
-            <IconButton
-                onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="Last Page"
-            >
-                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
             </IconButton>
         </div>
     );
@@ -93,14 +70,13 @@ class FixturesTable extends Component {
 
     render() {
         return (
-            <Table >
+            <Table size="small" >
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">Home Team</TableCell>
-                        <TableCell align="right">Score</TableCell>
+                        <TableCell align="center">Score</TableCell>
                         <TableCell align="center">Away team</TableCell>
-                        <TableCell align="right">Date</TableCell>
-                        <TableCell align="right">Status</TableCell>
+                        <TableCell align="left">Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -118,7 +94,7 @@ class FixturesTable extends Component {
                         rowsPerPage={this.state.rowsPerPage}
 
                         SelectProps={{
-                            inputProps: { 'aria-label': 'Rows per page' },
+                            inputProps: { 'aria-label': 'Per page' },
                             native: true,
                         }}
                         page={this.state.page}

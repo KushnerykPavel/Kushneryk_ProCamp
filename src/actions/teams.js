@@ -1,5 +1,5 @@
 import { getTeam } from '../providers';
-import { GET_TEAMS, GET_TEAM_DATA } from './types'
+import { GET_TEAMS, GET_TEAM } from './types'
 
 export const teamsData = id => {
     return {
@@ -8,9 +8,16 @@ export const teamsData = id => {
     }
 }
 
+export const teamData = id => {
+    return {
+        type: GET_TEAM,
+        payload: id
+    }
+}
+
 export const teamGetDataSuccess = payload => {
     return {
-        type: GET_TEAM_DATA,
+        type: GET_TEAM,
         payload
     }
 }

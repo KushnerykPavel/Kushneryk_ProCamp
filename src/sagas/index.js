@@ -1,8 +1,9 @@
 import { all } from 'redux-saga/effects';
-import { watchGetTeams } from './teamsSaga'
+import { watchGetTeams, watchGetTeam } from './teamsSaga'
 
 export default function* rootSaga() {
     yield all([
-        watchGetTeams()
+        watchGetTeams(),
+        watchGetTeam()
     ])
 }

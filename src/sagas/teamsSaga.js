@@ -1,10 +1,12 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import { getTeams } from '../providers';
+import { getTeams, getTeam } from '../providers';
 import {
     GET_TEAMS,
     GET_TEAMS_SUCCESS,
     GET_TEAMS_ERROR,
-    GET_TEAM_DATA
+    GET_TEAM,
+    GET_TEAM_SUCCESS,
+    GET_TEAM_ERROR
 } from '../actions/types'
 
 function* fetchTeams(action) {
@@ -16,6 +18,19 @@ function* fetchTeams(action) {
     }
 }
 
+function* fetchTeam(action) {
+    try {
+        const team = yield call(getTeam, action.payload)
+        yield put({ type: GET_TEAM_SUCCESS, payload: team })
+    } catch (err) {
+        yield put({ type: GET_TEAM_ERROR, payload: err })
+    }
+}
+
 export function* watchGetTeams() {
     yield takeEvery(GET_TEAMS, fetchTeams)
+}
+
+export function* watchGetTeam() {
+    yield takeEvery(GET_TEAM, fetchTeam)
 }

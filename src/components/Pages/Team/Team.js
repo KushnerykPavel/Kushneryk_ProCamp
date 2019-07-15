@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
-import { teamGetData } from '../../../actions/teams';
+import { teamData } from '../../../actions/teams';
 
 const styles = theme => {
 
@@ -130,7 +130,7 @@ class TeamCard extends Component {
 
 
 const mapStateToProps = state => {
-
+    console.log(state)
     return {
         team: state.teams.teams
     }
@@ -138,7 +138,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        teamData: id => dispatch(teamGetData(id))
+        teamData: id => dispatch(teamData(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TeamCard));

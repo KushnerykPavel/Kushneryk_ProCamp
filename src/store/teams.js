@@ -1,13 +1,15 @@
 import {
     GET_TEAMS_SUCCESS,
     GET_TEAMS,
-    GET_TEAM_DATA
+    GET_TEAM,
+    GET_TEAM_SUCCESS
 } from '../actions/types'
 
 const initialState = {
     teams: []
 }
 export function teams(state = initialState, action) {
+    console.log(action)
     switch (action.type) {
         case GET_TEAMS_SUCCESS:
             return {
@@ -19,7 +21,12 @@ export function teams(state = initialState, action) {
                 ...state,
                 teams: action.payload
             }
-        case GET_TEAM_DATA:
+        case GET_TEAM_SUCCESS:
+            return {
+                ...state,
+                teams: action.payload
+            }
+        case GET_TEAM:
             return {
                 ...state,
                 teams: action.payload

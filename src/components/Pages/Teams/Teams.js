@@ -73,7 +73,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         teamsData: id => dispatch(teamsData(id))
-        //teamsData: id => dispatch(teamsGetData(id))
     }
 }
 

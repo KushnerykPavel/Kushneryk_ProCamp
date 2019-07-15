@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
-import { getFixturesLive } from '../../../actions/fixtures';
+import { getFixturesLive } from '../../../store/actions/fixtures';
 import FixturesTable from '../../UI/FixturesTable/FixturesTable';
 
 const styles = theme => {

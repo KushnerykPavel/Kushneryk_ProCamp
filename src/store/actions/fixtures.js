@@ -28,15 +28,9 @@ export const getFixturesLiveSuccess = payload => {
 }
 
 export const getFixturesLive = (type) => {
-    switch (type) {
-        case ALL_LIVE_FIXTURES:
-            return dispatch => {
-                getFixtureLive().then(response => dispatch(getFixturesLiveSuccess(response)))
-            }
-        case PL_LIVE_FIXTURES:
-            return dispatch => {
-                getFixtureLiveByLeague(2).then(response => dispatch(getFixturesLiveSuccess(response)))
-            }
+    return {
+        type: GET_FIXTURES_LIVE,
+        payload: type
     }
 
 }

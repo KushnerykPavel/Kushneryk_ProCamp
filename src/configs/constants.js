@@ -1,1 +1,0 @@
-export const PL_LIVE_FIXTURES = "pl"

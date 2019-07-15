@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,26 +13,23 @@ import TableRow from '@material-ui/core/TableRow';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
-import { teamData } from '../../../store/actions/teams';
+import { teamGetData } from '../../../actions/teams';
 
-const styles = theme => {
-
-    return {
-        card: {
-            maxWidth: '80%',
-            marginLeft: '10%',
-            marginTop: '5%',
-        },
-        media: {
-            height: 350,
-            width: '70%',
-            margin: 'auto'
-        },
-        table: {
-            minWidth: 650,
-        },
-    }
-};
+const useStyles = makeStyles({
+    card: {
+        maxWidth: '80%',
+        marginLeft: '10%',
+        marginTop: '5%',
+    },
+    media: {
+        height: 350,
+        width: '70%',
+        margin: 'auto'
+    },
+    table: {
+        minWidth: 650,
+    },
+});
 
 const TableItem = props => {
     return (
@@ -47,7 +44,7 @@ const TableItem = props => {
 
 const TableData = props => {
 
-    const classes = props.classes;
+    const classes = useStyles();
     const { founded, venue_address, venue_capacity,
         venue_city, venue_name, venue_surface } = props;
 
@@ -79,7 +76,7 @@ const TableData = props => {
 
 const Team = teamData => {
 
-    const classes = teamData.classes;
+    const classes = useStyles();
     const { logo, name, country, ...taleData } = teamData;
 
     return (
@@ -93,7 +90,7 @@ const Team = teamData => {
                     <Typography gutterBottom variant="h5" component="h2">
                         {name} <b>({country})</b>
                     </Typography>
-                    <TableData {...taleData} classes={teamData.classes} />
+                    <TableData {...taleData} />
                 </CardContent>
             </CardActionArea>
 
@@ -101,35 +98,34 @@ const Team = teamData => {
     );
 }
 
-class TeamCard extends Component {
+const MediaCard = props => {
 
-    componentDidMount() {
-        const teamId = this.props.match.params.id;
-        this.props.teamData(teamId)
-    }
-    render() {
-        if (!this.props.team) {
-            return <Spinner />;
-        } else {
+    const teamId = props.match.params.id;
 
-            return <Team
-                classes={this.props.classes}
-                logo={this.props.team.logo}
-                name={this.props.team.name}
-                country={this.props.team.country}
-                founded={this.props.team.founded}
-                venue_address={this.props.team.venue_address}
-                venue_capacity={this.props.team.venue_capacity}
-                venue_city={this.props.team.venue_city}
-                venue_name={this.props.team.venue_name}
-                venue_surface={this.props.team.venue_surface}
-            />
-        }
+    useEffect(() => {
+        props.teamData(teamId)
+    }, [teamId])
+
+    if (!props.team) {
+        return <Spinner />;
+    } else {
+        
+        return <Team
+            logo={props.team.logo}
+            name={props.team.name}
+            country={props.team.country}
+            founded={props.team.founded}
+            venue_address={props.team.venue_address}
+            venue_capacity={props.team.venue_capacity}
+            venue_city={props.team.venue_city}
+            venue_name={props.team.venue_name}
+            venue_surface={props.team.venue_surface}
+        />
     }
 }
 
-
 const mapStateToProps = state => {
+
     return {
         team: state.teams.teams
     }
@@ -137,7 +133,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        teamData: id => dispatch(teamData(id))
+        teamData: id => dispatch(teamGetData(id))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TeamCard));
+export default connect(mapStateToProps, mapDispatchToProps)(MediaCard);

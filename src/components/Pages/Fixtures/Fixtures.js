@@ -1,31 +1,75 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../UI/Spinner/Spinner';
-import FixturesTable from '../../UI/FixturesTable/FixturesTable';
+import FixtureItem from '../../UI/FixtureItem/FixtureItem';
+
 import { connect } from 'react-redux';
-import { premierLeagueFixtures } from '../../../store/actions/fixtures';
+import { getFixturesByLeague } from '../../../actions/fixtures';
 
-class Fixtures extends Component {
+const FixturesList = data => {
+    return data.fixtures.map(fixture => <FixtureItem key={fixture.fixture_id} {...fixture} />)
+}
 
-    state = {
-        page: 0,
-        listData: null,
-        rowsPerPage: 10
-    }
 
-    componentDidMount() {
-        this.props.fixturesList();
-    }
+const Navigation = (props) => {
+    return (<div>
+        <button onClick={props.prevPage}>Prev</button>
+        <p style={{ display: 'inline-block', margin: 10 }}>
+            Page: {props.currPage + 1} of {props.totalPages}
+        </p>
+        <button onClick={props.nextPage}>Next</button>
+    </div >)
+}
+const Fixtures = props => {
+    const OFFSET = 8;
+    const [page, setPage] = useState(0);
+    const [listData, setListData] = useState(null);
 
-    render() {
-        if (!this.props.fixtures) {
-            return <Spinner />
-        } else {
-            return (
-                <FixturesTable fixtures={this.props.fixtures} />
-            );
+    const prevPage = () => {
+        if (page >= 1) {
+            let prev = page - 1;
+            setPage(prev)
+            setListData(props.fixtures.slice(OFFSET * prev, OFFSET * (prev + 1)));
         }
 
+    }
+
+    const nextPage = () => {
+        let next = page + 1
+        setPage(next)
+        setListData(props.fixtures.slice(OFFSET * next, OFFSET * (next + 1)));
+    }
+
+    useEffect(() => {
+        props.fixturesList();
+    }, [])
+
+    if (!props.fixtures) {
+        return <Spinner />
+    } else if (!listData) {
+        return (
+            <div>
+                <Navigation
+                    prevPage={prevPage}
+                    nextPage={nextPage}
+                    currPage={page}
+                    totalPages={parseInt(props.fixtures.length / OFFSET)}
+                />
+                <FixturesList fixtures={props.fixtures.slice(0, OFFSET)}  />
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <Navigation
+                    prevPage={prevPage}
+                    nextPage={nextPage}
+                    currPage={page}
+                    totalPages={parseInt(props.fixtures.length / OFFSET)}
+                />
+                <FixturesList fixtures={listData}  />
+            </div>
+        )
     }
 
 }
@@ -38,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(premierLeagueFixtures())
+        fixturesList: () => dispatch(getFixturesByLeague())
     }
 }
 

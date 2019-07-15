@@ -3,7 +3,8 @@ import axios from '../configs/axios';
 export const getCountries = async () => {
     try {
         let res = await axios.get('/countries');
-        return res.data;
+        let { data } = res;
+        return data;
     } catch (e) {
         return e;
     }
@@ -12,7 +13,8 @@ export const getCountries = async () => {
 export const getTeams = async leagueId => {
     try {
         let res = await axios.get(`/teams/league/${leagueId}`);
-        return res.data.api.teams;
+        let { data } = res;
+        return data.api.teams;
     } catch (e) {
         return e;
     }
@@ -21,8 +23,10 @@ export const getTeams = async leagueId => {
 export const getTeam = async teamId => {
     try {
         let res = await axios.get(`/teams/team/${teamId}`);
-        if (+res.data.api.results) {
-            return res.data.api.teams[0];
+        let { data } = res;
+
+        if (+data.api.results) {
+            return data.api.teams[0];
         } else {
             throw Error;
         }
@@ -31,10 +35,11 @@ export const getTeam = async teamId => {
     }
 }
 
-export const getPremierLeagueFixtures = async () => {
+export const getFixtures = async () => {
     try {
         let res = await axios.get('/fixtures/league/2');
-        return res.data.api.fixtures;
+        let { data } = res;
+        return data.api.fixtures;
     } catch (e) {
         return e;
     }
@@ -43,16 +48,8 @@ export const getPremierLeagueFixtures = async () => {
 export const getFixtureLive = async () => {
     try {
         let res = await axios.get('/fixtures/live');
-        return res.data.api.fixtures;
-    } catch (e) {
-        return e;
-    }
-}
-
-export const getFixtureLiveByLeague = async (leagueId) => {
-    try {
-        let res = await axios.get(`/fixtures/live/${leagueId}-${leagueId}-${leagueId}`);
-        return res.data.api.fixtures;
+        let { data } = res;
+        return data.api.fixtures;
     } catch (e) {
         return e;
     }
@@ -61,16 +58,8 @@ export const getFixtureLiveByLeague = async (leagueId) => {
 export const getEventsByFixture = async fixtureId => {
     try {
         let res = await axios.get(`/events/${fixtureId}`);
-        return res.data.api.events;
-    } catch (e) {
-        return e;
-    }
-}
-
-export const getStandingByLeague = async leagueId => {
-    try {
-        let res = await axios.get(`/leagueTable/${leagueId}`);
-        return res.data.api.standings
+        let { data } = res;
+        return data.api.events;
     } catch (e) {
         return e;
     }

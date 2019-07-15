@@ -9,7 +9,6 @@ import EventItemType from './EventItemType';
 
 
 const EventListItem = (event) => {
-    console.log(event)
     return (<div>
         <span>{event.elapsed} m </span>
         {event.player}({event.teamName})

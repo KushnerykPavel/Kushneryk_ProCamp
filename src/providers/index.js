@@ -12,6 +12,7 @@ export const getCountries = async () => {
 export const getTeams = async leagueId => {
     try {
         let res = await axios.get(`/teams/league/${leagueId}`);
+        await getStandingByLeague(leagueId);
         return res.data.api.teams;
     } catch (e) {
         return e;
@@ -62,6 +63,15 @@ export const getEventsByFixture = async fixtureId => {
     try {
         let res = await axios.get(`/events/${fixtureId}`);
         return res.data.api.events;
+    } catch (e) {
+        return e;
+    }
+}
+
+export const getStandingByLeague = async leagueId => {
+    try {
+        let res = await axios.get(`/leagueTable/${leagueId}`);
+        return res.data.api.standings
     } catch (e) {
         return e;
     }

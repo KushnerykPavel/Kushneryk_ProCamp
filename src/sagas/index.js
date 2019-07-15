@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
-import { watchGetTeams, watchGetTeam } from './teamsSaga'
+import { watchTeams, watchTeam } from './teamsSaga'
+import { watchPremierLeagueFixtures } from './fixturesSaga'
 
 export default function* rootSaga() {
     yield all([
-        watchGetTeams(),
-        watchGetTeam()
+        watchTeams(),
+        watchTeam(),
+        watchPremierLeagueFixtures()
     ])
 }

@@ -31,7 +31,7 @@ export const getTeam = async teamId => {
     }
 }
 
-export const getFixtures = async () => {
+export const getPremierLeagueFixtures = async () => {
     try {
         let res = await axios.get('/fixtures/league/2');
         return res.data.api.fixtures;

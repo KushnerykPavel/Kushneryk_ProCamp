@@ -27,10 +27,10 @@ function* fetchTeam(action) {
     }
 }
 
-export function* watchGetTeams() {
+export function* watchTeams() {
     yield takeEvery(GET_TEAMS, fetchTeams)
 }
 
-export function* watchGetTeam() {
+export function* watchTeam() {
     yield takeEvery(GET_TEAM, fetchTeam)
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import FixturesTable from '../../UI/FixturesTable/FixturesTable';
 import { connect } from 'react-redux';
-import { getFixturesByLeague } from '../../../actions/fixtures';
+import { premierLeagueFixtures } from '../../../actions/fixtures';
 
 class Fixtures extends Component {
 
@@ -38,7 +38,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(getFixturesByLeague())
+        fixturesList: () => dispatch(premierLeagueFixtures())
     }
 }
 

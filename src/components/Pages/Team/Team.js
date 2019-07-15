@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
-import { teamData } from '../../../actions/teams';
+import { teamData } from '../../../store/actions/teams';
 
 const styles = theme => {
 

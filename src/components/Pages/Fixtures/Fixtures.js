@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import FixturesTable from '../../UI/FixturesTable/FixturesTable';
 import { connect } from 'react-redux';
-import { premierLeagueFixtures } from '../../../actions/fixtures';
+import { premierLeagueFixtures } from '../../../store/actions/fixtures';
 
 class Fixtures extends Component {
 

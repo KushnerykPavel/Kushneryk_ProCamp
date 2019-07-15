@@ -7,7 +7,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
 
-import { teamsData } from '../../../actions/teams'
+import { teamsData } from '../../../store/actions/teams'
 
 
 const styles = theme => {

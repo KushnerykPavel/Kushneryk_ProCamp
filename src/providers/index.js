@@ -12,7 +12,6 @@ export const getCountries = async () => {
 export const getTeams = async leagueId => {
     try {
         let res = await axios.get(`/teams/league/${leagueId}`);
-        await getStandingByLeague(leagueId);
         return res.data.api.teams;
     } catch (e) {
         return e;

@@ -50,6 +50,12 @@ class LiveFixturesSegment extends Component {
     }
 }
 
+class StandingsSegment extends Component {
+    render() {
+        return (<p>Standings List</p>)
+    }
+}
+
 
 class Home extends Component {
     render() {
@@ -59,10 +65,10 @@ class Home extends Component {
                     <LiveFixturesSegment {...this.props} />
                 </Grid>
                 <Grid item xs={4} >
-                    <p>Item2</p>
+                    <StandingsSegment {...this.props} />
                 </Grid>
                 <Grid item xs={3} >
-                    <p>Item2</p>
+                    <p>Odds</p>
                 </Grid>
             </Grid>
         )
@@ -78,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: type => dispatch(getFixturesLive(type))
+        fixturesList: type => dispatch(getFixturesLive(type)),
     }
 }
 

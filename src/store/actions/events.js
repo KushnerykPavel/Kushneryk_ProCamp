@@ -1,5 +1,5 @@
-import { getEventsByFixture } from '../providers';
-import { GET_EVENTS_BY_FIXTURE_SUCCESS, LOADING } from './types';
+import { getEventsByFixture } from '../../providers';
+import { GET_EVENTS_BY_FIXTURE_SUCCESS, LOADING } from '../types';
 
 export const getEventsByFixtureSuccess = (payload) => {
     return {

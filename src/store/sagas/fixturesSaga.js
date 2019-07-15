@@ -1,11 +1,11 @@
-import { getPremierLeagueFixtures, getFixtureLive, getFixtureLiveByLeague } from '../providers';
+import { getPremierLeagueFixtures, getFixtureLive, getFixtureLiveByLeague } from '../../providers';
 import {
     GET_FIXTURES_SUCCESS,
     GET_PREMIER_LEAGUE_FIXTURES,
     GET_FIXTURES_LIVE,
     LOADING
-} from '../actions/types'
-import { ALL_LIVE_FIXTURES, PL_LIVE_FIXTURES } from '../configs/constants'
+} from '../types'
+import { ALL_LIVE_FIXTURES, PL_LIVE_FIXTURES } from '../../configs/constants'
 import { call, takeEvery, put } from 'redux-saga/effects';
 
 function* fetchPremierLeagueFixtures() {

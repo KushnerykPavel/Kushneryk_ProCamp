@@ -1,4 +1,4 @@
-import { GET_EVENTS_BY_FIXTURE_SUCCESS, LOADING } from '../actions/types';
+import { GET_EVENTS_BY_FIXTURE_SUCCESS, LOADING } from '../types';
 
 const initialState = {
     events: []

@@ -3,13 +3,13 @@ import {
     GET_TEAMS,
     GET_TEAM,
     GET_TEAM_SUCCESS
-} from '../actions/types'
+} from '../types'
 
 const initialState = {
     teams: []
 }
 export function teams(state = initialState, action) {
-    console.log(action)
+
     switch (action.type) {
         case GET_TEAMS_SUCCESS:
             return {

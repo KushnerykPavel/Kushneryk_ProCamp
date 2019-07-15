@@ -1,4 +1,4 @@
-import { GET_TEAMS, GET_TEAM } from './types'
+import { GET_TEAMS, GET_TEAM } from '../types'
 
 export const teamsData = id => {
     return {

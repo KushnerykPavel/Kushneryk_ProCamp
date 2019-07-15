@@ -1,5 +1,5 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import { getTeams, getTeam } from '../providers';
+import { getTeams, getTeam } from '../../providers';
 import {
     GET_TEAMS,
     GET_TEAMS_SUCCESS,
@@ -7,7 +7,7 @@ import {
     GET_TEAM,
     GET_TEAM_SUCCESS,
     GET_TEAM_ERROR
-} from '../actions/types'
+} from '../types'
 
 function* fetchTeams(action) {
     try {

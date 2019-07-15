@@ -1,10 +1,10 @@
-import { getFixtureLive, getFixtureLiveByLeague } from '../providers';
+import { getFixtureLive, getFixtureLiveByLeague } from '../../providers';
 import {
     GET_PREMIER_LEAGUE_FIXTURES,
     GET_FIXTURES_LIVE,
     LOADING
-} from './types'
-import { ALL_LIVE_FIXTURES, PL_LIVE_FIXTURES } from '../configs/constants'
+} from '../types'
+import { ALL_LIVE_FIXTURES, PL_LIVE_FIXTURES } from '../../configs/constants'
 
 
 export const premierLeagueFixtures = payload => {

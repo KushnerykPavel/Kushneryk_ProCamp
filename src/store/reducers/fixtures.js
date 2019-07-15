@@ -2,7 +2,7 @@ import {
     GET_FIXTURES_SUCCESS,
     GET_FIXTURES_LIVE,
     LOADING
-} from '../actions/types'
+} from '../types'
 
 const initialState = {
     fixtures: []

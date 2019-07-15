@@ -10,8 +10,8 @@ import thunk from 'redux-thunk';
 import createMiddleware from 'redux-saga';
 
 
-import rootReducer from './store/rootReducer';
-import rootSaga from './sagas';
+import rootReducer from './store/reducers/rootReducer';
+import rootSaga from './store/sagas';
 
 
 const sagaMiddleware = createMiddleware();

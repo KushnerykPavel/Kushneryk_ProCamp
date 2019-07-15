@@ -6,7 +6,8 @@ import TeamItem from '../../UI/TeamItem/TeamItem';
 import Spinner from '../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
-import { teamsGetData } from '../../../actions/teams';
+
+import { teamsData } from '../../../actions/teams'
 
 
 const styles = theme => {
@@ -64,6 +65,7 @@ class Teams extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
         teams: state.teams.teams
     }
@@ -71,7 +73,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        teamsData: id => dispatch(teamsGetData(id))
+        teamsData: id => dispatch(teamsData(id))
+        //teamsData: id => dispatch(teamsGetData(id))
     }
 }
 

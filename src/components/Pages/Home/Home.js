@@ -1,88 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
+import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { withStyles } from '@material-ui/core/styles';
 
 import Spinner from '../../UI/Spinner/Spinner';
-import FixtureItem from '../../UI/FixtureItem/FixtureItem';
 
 import { connect } from 'react-redux';
-import { getFixturesLive } from '../../../actions/fixtures';
+import { getFixturesLive } from '../../../store/actions/fixtures';
+import FixturesTable from '../../UI/FixturesTable/FixturesTable';
 
-const FixturesList = data => {
-    return data.fixtures.map(fixture => <FixtureItem key={fixture.fixture_id} {...fixture} />)
+const styles = theme => {
+    return {
+        indicator: {
+            backgroundColor: '#3e1050',
+        },
+    }
 }
 
+class LiveFixturesSegment extends Component {
 
-const Navigation = (props) => {
-    return (<div>
-        <button onClick={props.prevPage}>Prev</button>
-        <p style={{ display: 'inline-block', margin: 10 }}>
-            Page: {props.currPage + 1} of {props.totalPages}
-        </p>
-        <button onClick={props.nextPage}>Next</button>
-    </div >)
-}
-const LiveFixtures = props => {
-
-    const OFFSET = 8;
-    const [page, setPage] = useState(0);
-    const [listData, setListData] = useState(null);
-
-    useEffect(() => {
-        props.fixturesList();
-    }, [])
-
-    const prevPage = () => {
-        if (page >= 1) {
-            let prev = page - 1;
-            setPage(prev)
-            setListData(props.fixtures.slice(OFFSET * prev, OFFSET * (prev + 1)));
-        }
-
+    state = {
+        value: "all"
     }
 
-    const nextPage = () => {
-        let next = page + 1
-        setPage(next)
-        setListData(props.fixtures.slice(OFFSET * next, OFFSET * (next + 1)));
+    handleChange = (event, value) => {
+        this.props.fixturesList(value);
+        this.setState({ value: value })
     }
 
+    componentDidMount() {
+        this.props.fixturesList(this.state.value);
+    }
 
-
-    if (!props.fixtures) {
-        return <Spinner />
-    } else if (props.fixtures.length === 0) {
-        return <p>Unfortunately no data yet!</p>
-    } else if (!listData) {
+    render() {
+        const fixures = this.props.fixtures ? <FixturesTable fixtures={this.props.fixtures} /> : <Spinner />
         return (
-            <div>
-                <Navigation
-                    prevPage={prevPage}
-                    nextPage={nextPage}
-                    currPage={page}
-                    totalPages={parseInt(props.fixtures.length / OFFSET)}
-                />
-                <FixturesList fixtures={props.fixtures.slice(0, OFFSET)} />
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <Navigation
-                    prevPage={prevPage}
-                    nextPage={nextPage}
-                    currPage={page}
-                    totalPages={parseInt(props.fixtures.length / OFFSET)}
-                />
-                <FixturesList fixtures={listData} />
-            </div>
+            <React.Fragment>
+                <AppBar position="static" className={this.props.classes.indicator}>
+                    <Tabs value={this.state.value} onChange={this.handleChange}>
+                        <Tab value="all" label="Live" />
+                        <Tab value="pl" label="Premier League" />
+                    </Tabs>
+                </AppBar>
+                {fixures}
+            </React.Fragment>
         )
     }
-
 }
 
-const Home = props => {
-    return (
-        <LiveFixtures {...props} />
-    )
+class StandingsSegment extends Component {
+    render() {
+        return (<p>Standings List</p>)
+    }
+}
+
+
+class Home extends Component {
+    render() {
+        return (
+            <Grid container spacing={2} >
+                <Grid item xs={5} >
+                    <LiveFixturesSegment {...this.props} />
+                </Grid>
+                <Grid item xs={4} >
+                    <StandingsSegment {...this.props} />
+                </Grid>
+                <Grid item xs={3} >
+                    <p>Odds</p>
+                </Grid>
+            </Grid>
+        )
+    }
 }
 
 
@@ -94,8 +84,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fixturesList: () => dispatch(getFixturesLive())
+        fixturesList: type => dispatch(getFixturesLive(type)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Home));

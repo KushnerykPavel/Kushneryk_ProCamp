@@ -1,4 +1,10 @@
-import { GET_FIXTURES_BY_LEAGUE, GET_FIXTURES_LIVE, LOADING } from '../actions/types'
+import {
+    GET_FIXTURES_SUCCESS,
+    GET_FIXTURES_LIVE,
+    GET_ALL_FIXTURES_LIVE,
+    GET_PREMIER_LEAGUE_FIXTURES_LIVE,
+    LOADING
+} from '../types'
 
 const initialState = {
     fixtures: []
@@ -6,7 +12,9 @@ const initialState = {
 
 export function fixtures(state = initialState, action) {
     switch (action.type) {
-        case GET_FIXTURES_BY_LEAGUE:
+        case GET_FIXTURES_SUCCESS:
+        case GET_ALL_FIXTURES_LIVE:
+        case GET_PREMIER_LEAGUE_FIXTURES_LIVE:
             return {
                 ...state,
                 fixtures: action.payload

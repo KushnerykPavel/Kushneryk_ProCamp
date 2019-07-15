@@ -65,7 +65,6 @@ class Teams extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         teams: state.teams.teams
     }

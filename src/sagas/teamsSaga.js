@@ -7,9 +7,9 @@ import {
     GET_TEAM_DATA
 } from '../actions/types'
 
-function* fetchTeams() {
+function* fetchTeams(action) {
     try {
-        const teams = yield call(getTeams, 2)
+        const teams = yield call(getTeams, action.payload)
         yield put({ type: GET_TEAMS_SUCCESS, payload: teams })
     } catch (err) {
         yield put({ type: GET_TEAMS_ERROR, payload: err })

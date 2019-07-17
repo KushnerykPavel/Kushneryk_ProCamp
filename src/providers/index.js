@@ -67,9 +67,9 @@ export const getEventsByFixture = async fixtureId => {
     }
 }
 
-export const getStandingByLeague = async leagueId => {
+export const getPremierLeagueStandings = async () => {
     try {
-        let res = await axios.get(`/leagueTable/${leagueId}`);
+        let res = await axios.get(`/leagueTable/2`);
         return res.data.api.standings
     } catch (e) {
         return e;

@@ -6,13 +6,6 @@ import { connect } from 'react-redux';
 import { premierLeagueFixtures } from '../../../store/actions/fixtures';
 
 class Fixtures extends Component {
-
-    state = {
-        page: 0,
-        listData: null,
-        rowsPerPage: 10
-    }
-
     componentDidMount() {
         this.props.fixturesList();
     }

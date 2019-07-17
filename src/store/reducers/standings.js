@@ -4,12 +4,11 @@ import {
 } from '../types';
 
 const initialState = {
-    standings: []
+    standings: null
 }
 
-export default function (state = initialState, action) {
-    const [type, payload] = action
-
+export function standings(state = initialState, action) {
+    const { type, payload } = action
     switch (type) {
         case GET_STANDINGS_SUCCESS:
             return {

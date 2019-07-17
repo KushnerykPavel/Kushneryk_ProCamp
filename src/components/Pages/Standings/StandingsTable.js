@@ -54,7 +54,6 @@ const TablePaginationActions = props => {
     );
 }
 const StandingsTable = props => {
-    console.log(props.standingsItems)
     return (
         <Table size="small">
             <TableHead>
@@ -65,9 +64,11 @@ const StandingsTable = props => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {props.standingsItems.map(row => (
-                    <StandingRow row={row} />
-                ))}
+                {props.standingsItems
+                    .slice(props.page * props.rowsPerPage, props.rowsPerPage * (props.page + 1))
+                    .map(row => (
+                        <StandingRow row={row} />
+                    ))}
             </TableBody>
             <TableFooter>
                 <TablePagination

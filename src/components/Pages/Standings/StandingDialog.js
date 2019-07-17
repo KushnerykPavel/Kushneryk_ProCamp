@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 const StandingDialog = props => {
     const classes = useStyles();
-    console.log(props)
     return (
         <Dialog
             open={props.open}

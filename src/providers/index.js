@@ -70,7 +70,7 @@ export const getEventsByFixture = async fixtureId => {
 export const getPremierLeagueStandings = async () => {
     try {
         let res = await axios.get(`/leagueTable/2`);
-        return res.data.api.standings
+        return res.data.api.standings[0]
     } catch (e) {
         return e;
     }

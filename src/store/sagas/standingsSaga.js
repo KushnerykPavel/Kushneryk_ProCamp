@@ -12,6 +12,7 @@ function* fetchPremierLeagueStandings(action) {
     yield put({ type: LOADING })
     try {
         const standings = yield call(getPremierLeagueStandings)
+        console.log(standings)
         yield put({ type: GET_STANDINGS_SUCCESS, payload: standings })
     } catch (error) {
         yield put({ type: GET_STANDINGS_ERROR, payload: error })

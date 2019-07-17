@@ -10,6 +10,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { getFixturesLive } from '../../../store/actions/fixtures';
 import FixturesTable from '../../UI/FixturesTable/FixturesTable';
+import Standings from '../Standings/Standings'
 
 const styles = theme => {
     return {
@@ -52,7 +53,7 @@ class LiveFixturesSegment extends Component {
 
 class StandingsSegment extends Component {
     render() {
-        return (<p>Standings List</p>)
+        return (<Standings />)
     }
 }
 
@@ -60,7 +61,7 @@ class StandingsSegment extends Component {
 class Home extends Component {
     render() {
         return (
-            <Grid container spacing={2} >
+            <Grid container>
                 <Grid item xs={5} >
                     <LiveFixturesSegment {...this.props} />
                 </Grid>

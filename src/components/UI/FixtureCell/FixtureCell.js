@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
@@ -59,13 +58,13 @@ class FixtureCell extends Component {
     render() {
         return (
             <TableRow onClick={() => this.handleClickOpen(this.props.fixture_id)}>
-                <TableCell component="th" scope="row" align="center">
+                <TableCell component="th" scope="row" align="left">
                     <Link to={`/teams/${this.props.homeTeam.team_id}`}>
                         {this.props.homeTeam.team_name}
                     </Link>
                 </TableCell>
-                <TableCell align="center"><b>{this.props.score.fulltime}({this.props.score.halftime})</b></TableCell>
-                <TableCell align="center">
+                <TableCell align="center"><b>{this.props.score.halftime}{this.props.score.fulltime ? `(${this.props.score.fulltime})` : ''}</b></TableCell>
+                <TableCell align="right">
                     <Link to={`/teams/${this.props.awayTeam.team_id}`}>
                         {this.props.awayTeam.team_name}
                     </Link>

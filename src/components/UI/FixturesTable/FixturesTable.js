@@ -73,9 +73,9 @@ class FixturesTable extends Component {
             <Table size="small" >
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Home Team</TableCell>
+                        <TableCell align="left">Home Team</TableCell>
                         <TableCell align="center">Score</TableCell>
-                        <TableCell align="center">Away team</TableCell>
+                        <TableCell align="right">Away team</TableCell>
                         <TableCell align="left">Status</TableCell>
                     </TableRow>
                 </TableHead>

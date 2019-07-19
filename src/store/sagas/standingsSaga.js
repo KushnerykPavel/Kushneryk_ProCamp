@@ -4,12 +4,12 @@ import {
     GET_STANDINGS,
     GET_STANDINGS_SUCCESS,
     GET_STANDINGS_ERROR,
-    LOADING
+    LOADING_STANDINGS
 } from '../types';
 
 
 function* fetchPremierLeagueStandings(action) {
-    yield put({ type: LOADING })
+    yield put({ type: LOADING_STANDINGS })
     try {
         const standings = yield call(getPremierLeagueStandings)
         console.log(standings)

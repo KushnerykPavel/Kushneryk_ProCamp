@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { getFixturesLive } from '../../../store/actions/fixtures';
 import FixturesTable from '../../UI/FixturesTable/FixturesTable';
 import Standings from '../Standings/Standings'
+import Odds from '../Odds/Odds';
 
 const styles = theme => {
     return {
@@ -69,7 +70,7 @@ class Home extends Component {
                     <StandingsSegment {...this.props} />
                 </Grid>
                 <Grid item xs={3} >
-                    <p>Odds</p>
+                    <Odds />
                 </Grid>
             </Grid>
         )

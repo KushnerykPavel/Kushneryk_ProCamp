@@ -7,12 +7,14 @@ import Teams from './components/Pages/Teams/Teams';
 import Team from './components/Pages/Team/Team';
 import PageNotFound from './components/Pages/PageNotFound/PageNotFound';
 import Fixtures from './components/Pages/Fixtures/Fixtures';
+import Odds from './components/Pages/Odds/Odds';
 
 function App() {
   return (
     <BrowserRouter >
       <Navbar />
       <Switch>
+        <Route path="/odds" component={Odds} />
         <Route path="/teams/:id" component={Team} />
         <Route path="/teams" component={Teams} />
         <Route path="/fixtures" component={Fixtures} />

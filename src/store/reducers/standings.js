@@ -1,6 +1,6 @@
 import {
     GET_STANDINGS_SUCCESS,
-    LOADING
+    LOADING_STANDINGS
 } from '../types';
 
 const initialState = {
@@ -15,10 +15,10 @@ export function standings(state = initialState, action) {
                 ...state,
                 standings: payload
             }
-        case LOADING:
+        case LOADING_STANDINGS:
             return {
                 ...state,
-                standings: null
+                standings: []
             }
         default:
             return state

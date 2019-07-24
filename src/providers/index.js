@@ -80,13 +80,22 @@ export const getPremierLeagueStandings = async () => {
     }
 }
 
+export const getFixtureById = async fixture_id => {
+    try {
+        let res = await axios.get(`/fixtures/id/${fixture_id}`)
+        return res
+    } catch (e) {
+        return e
+    }
+}
+
 export const getOdds = async () => {
     try {
         let res = [
             {
                 "fixture": {
-                    "league_id": 404,
-                    "fixture_id": 108705,
+                    "league_id": 2,
+                    "fixture_id": 75,
                     "updateAt": 1557496046
                 },
                 "bookmakers": [
@@ -163,7 +172,8 @@ export const getOdds = async () => {
                 ]
             }
         ]
-        return res[0].bookmakers[0].bets
+
+        return res[0]
     } catch (error) {
         return error
     }

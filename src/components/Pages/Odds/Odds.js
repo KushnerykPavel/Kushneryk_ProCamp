@@ -8,7 +8,7 @@ const styles = theme => {
     return {
         background: {
             backgroundColor: '#3e1050',
-            height: "10%",
+            height: 50,
 
         },
     }
@@ -16,17 +16,25 @@ const styles = theme => {
 
 class Odds extends Component {
 
+    state = {
+        odds: null
+    }
+
     componentDidMount() {
         getOdds()
-            .then(res => console.log(res))
+            .then(odds => this.setState({ odds: odds }))
     }
 
     render() {
-        return (
-            <Paper className={this.props.classes.background} square expansion8>
-                <div style={{ color: "white" }} >Odds</div>
-            </Paper>
-        )
+        if (this.state.odds) {
+            return (
+                <Paper className={this.props.classes.background} square expansion8>
+                    <div style={{ color: "white" }} >Odds</div>
+                </Paper>
+            )
+        } else {
+            return <p>Loading</p>
+        }
     }
 }
 

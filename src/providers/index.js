@@ -1,5 +1,5 @@
 import axios from '../configs/axios';
-
+import fixtures_mock from '../mocks/fixtures_live.json'
 export const getCountries = async () => {
     try {
         let res = await axios.get('/countries');
@@ -52,6 +52,7 @@ export const getFixtureLive = async () => {
 export const getFixtureLiveByLeague = async (leagueId) => {
     try {
         let res = await axios.get(`/fixtures/live/${leagueId}-${leagueId}-${leagueId}`);
+        if (!res.data.api.results) return fixtures_mock.fixtures
         return res.data.api.fixtures;
     } catch (e) {
         return e;

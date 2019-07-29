@@ -11,7 +11,7 @@ const CARD = "Card"
 const SUBST = "subst"
 
 
-const EventItemIcon = props => (
+export const EventItemIcon = props => (
     <img src={props.variant} alt={props.detail} width="20" height="20" style={{ paddingLeft: "10px", paddingRight: "10px" }} />
 )
 const EventItemType = props => {

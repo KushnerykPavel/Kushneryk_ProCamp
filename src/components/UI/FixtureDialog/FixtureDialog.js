@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EventItemType from './EventItemType';
 
 
-const EventListItem = (event) => {
+export const EventListItem = (event) => {
     return (<div>
         <span>{event.elapsed} m </span>
         {event.player}({event.teamName})
@@ -28,7 +28,7 @@ const FixtureDialog = props => (
         <DialogTitle id="scroll-dialog-title">Events</DialogTitle>
         <DialogContent dividers>
             <DialogContentText>
-                {props.data.map(event => <EventListItem {...event} />)}
+                {props.data.map((event, idx) => <EventListItem key={idx} {...event} />)}
             </DialogContentText>
         </DialogContent>
         <DialogActions>
